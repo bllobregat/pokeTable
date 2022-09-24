@@ -9,5 +9,5 @@ export interface ImageProps {
 }
 
 export const Image = (props: ImageProps): ReactElement<ImageProps> => {
-	return <img {...props} />;
+	return <img {...props} alt={props.alt} />;
 };
