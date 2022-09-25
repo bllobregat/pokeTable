@@ -28,7 +28,11 @@ export const InputSearch = (props: InputSearchProps) => {
 	};
 
 	return (
-		<form className="searchContainer" onSubmit={handleSubmit}>
+		<form
+			data-testid="form_container"
+			className="searchContainer"
+			onSubmit={handleSubmit}
+		>
 			<p>Pokedex</p>
 			<Input
 				type="search"

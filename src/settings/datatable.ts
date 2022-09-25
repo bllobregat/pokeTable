@@ -13,5 +13,5 @@ export const dataTableSettings: DataTableSettings = {
 	columns,
 	pageSize: 5,
 	rowsPerPageOptions: [5,10,20],
-	checkboxSelection: true,
+	checkboxSelection: false,
 };

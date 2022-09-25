@@ -1,0 +1,31 @@
+.appClass {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: #fff5e4;
+}
+
+.appClass header {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: auto;
+	margin: 2rem;
+}
+
+.appClass main {
+	/* background-color: #FFE3E1; */
+	margin: 3rem;
+}
+
+.imageClass {
+	height: auto;
+	max-width: 10rem;
+}
+
+.formClass {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}

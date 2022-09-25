@@ -6,6 +6,7 @@ export interface Row {
 	name: string;
 	types: string[];
 	evolutionChain: string[];
+	dataAdded?: Date | string;
 }
 
 export interface DataTableProps {

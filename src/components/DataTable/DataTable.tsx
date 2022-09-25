@@ -1,8 +1,14 @@
-import { DataGrid } from "@mui/x-data-grid";
+import { FormControlLabel, Switch } from "@mui/material";
+import {
+	DataGrid,
+	GridToolbarContainer,
+	GridToolbarDensitySelector,
+} from "@mui/x-data-grid";
 import { useContext, useEffect, useState } from "react";
 import { PokemonsContext } from "../../context/PokemonsProvider";
 import { useFetchPokemon } from "../../hooks/useFetchPokemon";
 import { removePokemonRowByIndex } from "../../utils/tableActionsUtils";
+import { CustomToolbar } from "../CustomToolbar/CustomToolBar";
 import { DataTableProps, Row } from "./DataTableProps";
 
 export const DataTable = (props: DataTableProps) => {
@@ -15,7 +21,6 @@ export const DataTable = (props: DataTableProps) => {
 		...rows.map((row: Row): number => row.id),
 	]);
 
-	
 	useEffect(() => {
 		const isNotNewPokemon: boolean = !rowIds.includes(pokemonIndex);
 		if (Object?.keys(pokemonData)?.length > 0 && isNotNewPokemon) {
@@ -31,6 +36,7 @@ export const DataTable = (props: DataTableProps) => {
 		});
 	}, [pokemonIndex]);
 
+	
 	return (
 		<div
 			data-testid={"datagrid-container"}
@@ -49,6 +55,21 @@ export const DataTable = (props: DataTableProps) => {
 				checkboxSelection={checkboxSelection}
 				onPageSizeChange={(newSize) => setNewPageSize(newSize)}
 				getRowHeight={() => "auto"}
+				components={{
+					Toolbar: CustomToolbar,
+				}}
+				sx={{
+					boxShadow: 2,
+					border: 2,
+					maxHeight: 500,
+					borderColor: "primary.light",
+					"& .MuiDataGrid-cell:hover": {
+						color: "primary.main",
+					},
+					"& .MuiDataGrid-columnHeaders": {
+						backgroundColor: "#FF9494",
+					},
+				}}
 			/>
 		</div>
 	);

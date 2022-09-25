@@ -14,16 +14,20 @@ jest.mock("@mui/x-data-grid", () => {
 	};
 });
 
-
 describe("DataTable Tests", () => {
+	afterEach(() => {
+		jest.clearAllMocks();
+	});
+
 	it("Should Render DataTable", () => {
 		render(<DataTable rows={pokemonsDataMock} settings={dataTableSettings} />);
 		expect(screen.getByTestId("datagrid-container")).toBeInTheDocument();
 	});
 
-	it("Should Render DataTable with 5 rows", () => {
+	it("Should Render DataTable with 4 rows", () => {
 		render(<DataTable rows={pokemonsDataMock} settings={dataTableSettings} />);
-		const dataTableContainer = screen.getByTestId("datagrid-container");
-		expect(dataTableContainer).toBeInTheDocument();
+		const datatable = screen.getByTestId("datagrid-container");
+		const elements = datatable.getElementsByClassName("MuiDataGrid-row");
+		expect(elements.length).toEqual(pokemonsDataMock.length);
 	});
 });

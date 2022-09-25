@@ -71,13 +71,13 @@ export const columns: GridColDef[] = [
 		),
 	},
 	{
-		field: "added",
+		field: "dataAdded",
 		headerName: "Added At",
 		width: 200,
 		headerAlign: "center",
 		align: "center",
 		renderCell: (params: GridRenderCellParams) => {
-			return moment(new Date()).format("YYYY-MM-DD HH:MM:SS");
+			return <p>{moment(params?.value).format("DD/MM/YYYY")}</p>;
 		},
 	},
 	{

@@ -8,6 +8,7 @@ export const pokemonsDataMock: Row[] = [
 		name: "pikachu",
 		types: ["static"],
 		evolutionChain: ["pichu", "pikachu", "raichu"],
+		dataAdded: "2022-09-25T20:19:36.529Z",
 	},
 	{
 		id: 1,
@@ -16,6 +17,7 @@ export const pokemonsDataMock: Row[] = [
 		name: "bulbasaur",
 		types: ["grass", "poison"],
 		evolutionChain: ["bulbasaur", "ivysaur", "venasaur"],
+		dataAdded: "2022-09-25T20:19:36.529Z",
 	},
 	{
 		id: 4,
@@ -24,6 +26,7 @@ export const pokemonsDataMock: Row[] = [
 		name: "charmander",
 		types: ["fire"],
 		evolutionChain: ["charmander", "charmeleon", "charizard"],
+		dataAdded: "2022-09-25T20:19:36.529Z",
 	},
 	{
 		id: 7,
@@ -32,5 +35,6 @@ export const pokemonsDataMock: Row[] = [
 		name: "squirtle",
 		types: ["water"],
 		evolutionChain: ["squirtle", "wartortle", "blastoise"],
+		dataAdded: "2022-09-25T20:19:36.529Z",
 	},
 ];

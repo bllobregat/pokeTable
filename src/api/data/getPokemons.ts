@@ -19,13 +19,14 @@ const pokemonRowMapper = (data: any, evolutionChain: string[]): Row => {
 		name: capitalize(data.name),
 		types,
 		evolutionChain: evolutionChain,
+		dataAdded: new Date(),
 	};
 };
 
 export const getPokemon = async (query: string): Promise<Row> => {
 	const url = `https://pokeapi.co/api/v2/pokemon/${encodeURI(query)}`;
-	const { data } = await Axios.get(url);
-
+	const {data} = await Axios.get(url);
+	
 	if (!!data) {
 		const evolutionChain = await getEvolutions(data.id);
 		return pokemonRowMapper(data, evolutionChain);
@@ -37,6 +38,7 @@ export const getPokemon = async (query: string): Promise<Row> => {
 		name: "Unknown",
 		types: [],
 		evolutionChain: [],
+		dataAdded: new Date(),
 	};
 };
 
