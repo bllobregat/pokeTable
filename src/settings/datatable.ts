@@ -12,6 +12,6 @@ export interface DataTableSettings {
 export const dataTableSettings: DataTableSettings = {
 	columns,
 	pageSize: 5,
-	rowsPerPageOptions: [10],
+	rowsPerPageOptions: [5,10,20],
 	checkboxSelection: true,
 };

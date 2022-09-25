@@ -5,7 +5,7 @@ export interface Row {
 	image: string;
 	name: string;
 	types: string[];
-	evolution: string;
+	evolutionChain: string[];
 }
 
 export interface DataTableProps {

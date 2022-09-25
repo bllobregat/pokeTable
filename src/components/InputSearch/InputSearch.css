@@ -1,0 +1,11 @@
+.searchContainer {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+
+}
+
+.searchContainer p {
+    padding: 1.5rem;
+}
