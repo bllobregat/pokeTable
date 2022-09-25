@@ -1,11 +1,35 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { useState } from "react";
-import { DataTableProps } from "./DataTableProps";
+import { useContext, useEffect, useState } from "react";
+import { PokemonsContext } from "../../context/PokemonsProvider";
+import { useFetchPokemon } from "../../hooks/useFetchPokemon";
+import { removePokemonRowByIndex } from "../../utils/tableActionsUtils";
+import { DataTableProps, Row } from "./DataTableProps";
 
 export const DataTable = (props: DataTableProps) => {
+	const { pokemonIndex, setPokemons } = useContext(PokemonsContext);
+	const { pokemonData } = useFetchPokemon();
 	const { rows, settings } = props;
 	const { columns, pageSize, rowsPerPageOptions, checkboxSelection } = settings;
 	const [newPageSize, setNewPageSize] = useState(pageSize);
+	const [rowIds, setRowIds] = useState<number[]>([
+		...rows.map((row: Row): number => row.id),
+	]);
+
+	
+	useEffect(() => {
+		const isNotNewPokemon: boolean = !rowIds.includes(pokemonIndex);
+		if (Object?.keys(pokemonData)?.length > 0 && isNotNewPokemon) {
+			setRowIds((rowIds: number[]) => [pokemonData.id, ...rowIds]);
+			setPokemons([pokemonData, ...rows]);
+		}
+	}, [pokemonData, pokemonIndex]);
+
+	useEffect(() => {
+		setPokemons(removePokemonRowByIndex(rows, pokemonIndex));
+		setRowIds((rowIds: number[]): number[] => {
+			return rowIds.filter((rowId: number) => rowId !== pokemonIndex);
+		});
+	}, [pokemonIndex]);
 
 	return (
 		<div
