@@ -1,6 +1,12 @@
-# Getting Started with Create React App
+# Poke Table
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+:sunglasses: A small app to keep your Pokemons updated and organized. 
+
+:partying_face: You don'need to worry about to don't remembering how many pokemons you have anymore
+
+## Requirements
+
+**You’ll need to have Node 14.0.0 or later version on your local development machine** (but it’s not required on the server). We recommend using the latest LTS version. You can use [nvm](https://github.com/creationix/nvm#installation) (macOS/Linux) or [nvm-windows](https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows) to switch Node versions between different projects.
 
 ## Available Scripts
 
@@ -39,8 +45,3 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
