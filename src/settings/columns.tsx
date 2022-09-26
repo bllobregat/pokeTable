@@ -11,18 +11,6 @@ export const columns: GridColDef[] = [
 		width: 70,
 		headerAlign: "center",
 		align: "center",
-		sortable: true,
-	},
-	{
-		field: "image",
-		headerName: "Image",
-		width: 130,
-		renderCell: (params: GridRenderCellParams) => {
-			return <Image src={params.value} alt={params.value} />;
-		},
-		flex: 1,
-		headerAlign: "center",
-		align: "center",
 	},
 	{
 		field: "name",
@@ -31,6 +19,19 @@ export const columns: GridColDef[] = [
 		align: "center",
 		width: 130,
 		flex: 1,
+		sortable: true,
+	},
+	{
+		field: "image",
+		headerName: "Image",
+		width: 80,
+		renderCell: (params: GridRenderCellParams) => {
+			return <Image src={params.value} alt={params.value} />;
+		},
+		flex: 1,
+		headerAlign: "center",
+		align: "center",
+		sortable: false,
 	},
 	{
 		field: "types",
@@ -39,6 +40,7 @@ export const columns: GridColDef[] = [
 		flex: 1,
 		headerAlign: "center",
 		align: "center",
+		sortable: false,
 		renderCell: (params: GridRenderCellParams) => (
 			<ul
 				style={{
@@ -58,6 +60,7 @@ export const columns: GridColDef[] = [
 		flex: 1,
 		headerAlign: "center",
 		align: "center",
+		sortable: false,
 		renderCell: (params: GridRenderCellParams) => (
 			<ol
 				style={{
@@ -72,10 +75,11 @@ export const columns: GridColDef[] = [
 	},
 	{
 		field: "dataAdded",
-		headerName: "Added At",
+		headerName: "Data added",
 		width: 200,
 		headerAlign: "center",
 		align: "center",
+		sortable: false,
 		renderCell: (params: GridRenderCellParams) => {
 			return <p>{moment(params?.value).format("DD/MM/YYYY")}</p>;
 		},
@@ -84,6 +88,7 @@ export const columns: GridColDef[] = [
 		field: "actions",
 		headerName: "Actions",
 		type: "actions",
+		sortable: false,
 		renderCell: (params: GridRenderCellParams) => {
 			const { row } = params;
 			return <TableActions row={row} />;

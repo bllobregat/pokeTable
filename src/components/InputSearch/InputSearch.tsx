@@ -22,7 +22,7 @@ export const InputSearch = (props: InputSearchProps) => {
 		e.preventDefault();
 
 		if (!!inputValue && inputValue.trim().length > 2) {
-			props.setPokemonName(inputValue);
+			props.setPokemonName(inputValue.toLowerCase());
 			setinputValue("");
 		}
 	};
