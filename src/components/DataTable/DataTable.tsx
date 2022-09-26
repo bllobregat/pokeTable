@@ -1,13 +1,8 @@
-import { FormControlLabel, Switch } from "@mui/material";
-import {
-	DataGrid,
-	GridToolbarContainer,
-	GridToolbarDensitySelector,
-} from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import { useContext, useEffect, useState } from "react";
 import { PokemonsContext } from "../../context/PokemonsProvider";
 import { useFetchPokemon } from "../../hooks/useFetchPokemon";
-import { removePokemonRowByIndex } from "../../utils/tableActionsUtils";
+import { removePokemonRowByIndex } from "../../utils/utils";
 import { CustomToolbar } from "../CustomToolbar/CustomToolBar";
 import { DataTableProps, Row } from "./DataTableProps";
 
@@ -36,7 +31,6 @@ export const DataTable = (props: DataTableProps) => {
 		});
 	}, [pokemonIndex]);
 
-	
 	return (
 		<div
 			data-testid={"datagrid-container"}

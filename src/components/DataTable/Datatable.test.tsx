@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { pokemonsDataMock } from "../../api/mocks/pokemons";
+import { pokemonsRowsDataMock } from "../../api/mocks/pokemons";
 import { dataTableSettings } from "../../settings/datatable";
 import { DataTable } from "./DataTable";
 import type { DataGridProps } from "@mui/x-data-grid";
@@ -20,14 +20,14 @@ describe("DataTable Tests", () => {
 	});
 
 	it("Should Render DataTable", () => {
-		render(<DataTable rows={pokemonsDataMock} settings={dataTableSettings} />);
+		render(<DataTable rows={pokemonsRowsDataMock} settings={dataTableSettings} />);
 		expect(screen.getByTestId("datagrid-container")).toBeInTheDocument();
 	});
 
 	it("Should Render DataTable with 4 rows", () => {
-		render(<DataTable rows={pokemonsDataMock} settings={dataTableSettings} />);
+		render(<DataTable rows={pokemonsRowsDataMock} settings={dataTableSettings} />);
 		const datatable = screen.getByTestId("datagrid-container");
 		const elements = datatable.getElementsByClassName("MuiDataGrid-row");
-		expect(elements.length).toEqual(pokemonsDataMock.length);
+		expect(elements.length).toEqual(pokemonsRowsDataMock.length);
 	});
 });

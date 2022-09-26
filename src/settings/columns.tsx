@@ -1,7 +1,7 @@
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { Image } from "../components/Image/Image";
-import moment from "moment";
 import { TableActions } from "../components/TableActions/TableActions";
+import moment from "moment";
 
 export const columns: GridColDef[] = [
 	{

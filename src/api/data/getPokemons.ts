@@ -1,32 +1,12 @@
 import capitalize from "@mui/material/utils/capitalize";
 import Axios from "axios";
 import { Row } from "../../components/DataTable/DataTableProps";
-
-type imageType = {
-	slot: number;
-	type: { name: string; url: string };
-};
-
-const pokemonRowMapper = (data: any, evolutionChain: string[]): Row => {
-	const types: string[] =
-		data?.types?.map((type: imageType) => {
-			return capitalize(type.type.name);
-		}) || [];
-
-	return {
-		id: data.id,
-		image: data.sprites.front_default,
-		name: capitalize(data.name),
-		types,
-		evolutionChain: evolutionChain,
-		dataAdded: new Date(),
-	};
-};
+import { pokemonRowMapper } from "../../utils/utils";
 
 export const getPokemon = async (query: string): Promise<Row> => {
 	const url = `https://pokeapi.co/api/v2/pokemon/${encodeURI(query)}`;
-	const {data} = await Axios.get(url);
-	
+	const { data } = await Axios.get(url);
+
 	if (!!data) {
 		const evolutionChain = await getEvolutions(data.id);
 		return pokemonRowMapper(data, evolutionChain);
