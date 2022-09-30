@@ -10,7 +10,7 @@ export interface Row {
 }
 
 export interface DataTableProps {
-	rows: Row[];
+	rows?: Row[];
 	settings: DataTableSettings;
 	containerClassName?: {
 		height?: number;

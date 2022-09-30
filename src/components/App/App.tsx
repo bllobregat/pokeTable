@@ -6,12 +6,11 @@ import { dataTableSettings } from "../../settings/datatable";
 import { Header } from "../Header/Header";
 
 export const App = () => {
-	const { pokemons } = useContext(PokemonsContext);
 	return (
 		<div className="appClass" data-testid="app_container">
 			<Header />
 			<main>
-				<DataTable rows={pokemons} settings={dataTableSettings} />
+				<DataTable settings={dataTableSettings} />
 			</main>
 		</div>
 	);

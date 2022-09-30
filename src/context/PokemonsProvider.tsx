@@ -1,13 +1,29 @@
-import { ReactElement, ReactNode, createContext, useState } from "react";
+import {
+	ReactElement,
+	ReactNode,
+	createContext,
+	useState,
+	useReducer,
+} from "react";
 import { Row } from "../components/DataTable/DataTableProps";
+import {
+	pokemonReducer,
+	initRows,
+	PokemonActionType,
+} from "../reducers/PokemonReducer";
 
-export const PokemonsContext = createContext({
+type PokemonContextType = {
+	pokemonName: string;
+	setPokemonName: any;
+	state: Row[];
+	dispatch: React.Dispatch<PokemonActionType>;
+};
+
+export const PokemonsContext = createContext<PokemonContextType>({
 	pokemonName: "",
 	setPokemonName: (pokemonName: string): void => undefined,
-	pokemons: [] as Row[],
-	setPokemons: (pokemons: Row[]): void => undefined,
-	pokemonIndex: 0,
-	setPokemonIndex: (pokenIndex: number): void => undefined,
+	state: [],
+	dispatch: () => {},
 });
 
 interface PokemonsProviderProps {
@@ -18,18 +34,15 @@ export const PokemonsProvider = (
 	props: PokemonsProviderProps
 ): ReactElement<PokemonsProviderProps> => {
 	const [pokemonName, setPokemonName] = useState<string>("");
-	const [pokemonIndex, setPokemonIndex] = useState<number>(0);
-	const [pokemons, setPokemons] = useState<Row[]>([]);
+	const [state, dispatch] = useReducer(pokemonReducer, [], initRows);
 
 	return (
 		<PokemonsContext.Provider
 			value={{
 				pokemonName,
 				setPokemonName,
-				pokemons,
-				setPokemons,
-				pokemonIndex,
-				setPokemonIndex,
+				state,
+				dispatch,
 			}}
 		>
 			{props.children}

@@ -1,35 +1,32 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
+import { pokemonsRowsDataMock } from "../../api/mocks/pokemons";
 import { PokemonsContext } from "../../context/PokemonsProvider";
 import { useFetchPokemon } from "../../hooks/useFetchPokemon";
+import { ADD_POKEMON, initRows, pokemonReducer } from "../../reducers";
 import { removePokemonRowByIndex } from "../../utils/utils";
 import { CustomToolbar } from "../CustomToolbar/CustomToolBar";
 import { DataTableProps, Row } from "./DataTableProps";
 
 export const DataTable = (props: DataTableProps) => {
-	const { pokemonIndex, setPokemons } = useContext(PokemonsContext);
+	const { state, dispatch } = useContext(PokemonsContext);
 	const { pokemonData } = useFetchPokemon();
-	const { rows, settings } = props;
+	const { settings } = props;
 	const { columns, pageSize, rowsPerPageOptions, checkboxSelection } = settings;
 	const [newPageSize, setNewPageSize] = useState(pageSize);
-	const [rowIds, setRowIds] = useState<number[]>([
-		...rows.map((row: Row): number => row.id),
-	]);
 
 	useEffect(() => {
-		const isNotNewPokemon: boolean = !rowIds.includes(pokemonIndex);
-		if (Object?.keys(pokemonData)?.length > 0 && isNotNewPokemon) {
-			setRowIds((rowIds: number[]) => [pokemonData.id, ...rowIds]);
-			setPokemons([pokemonData, ...rows]);
+		const isANewPokemon: boolean = state
+			.map((pokemon) => pokemon.id)
+			.includes(pokemonData.id);
+		if (Object.keys(pokemonData).length > 0 && !isANewPokemon) {
+			dispatch({ type: ADD_POKEMON, payload: pokemonData });
 		}
-	}, [pokemonData, pokemonIndex]);
+	}, [pokemonData]);
 
 	useEffect(() => {
-		setPokemons(removePokemonRowByIndex(rows, pokemonIndex));
-		setRowIds((rowIds: number[]): number[] => {
-			return rowIds.filter((rowId: number) => rowId !== pokemonIndex);
-		});
-	}, [pokemonIndex]);
+		localStorage.setItem("state", JSON.stringify(state));
+	}, [state]);
 
 	return (
 		<div
@@ -42,7 +39,7 @@ export const DataTable = (props: DataTableProps) => {
 		>
 			<DataGrid
 				data-testid={"datagrid"}
-				rows={rows}
+				rows={state}
 				columns={columns}
 				pageSize={newPageSize}
 				rowsPerPageOptions={rowsPerPageOptions}

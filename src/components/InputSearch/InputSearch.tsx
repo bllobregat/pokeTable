@@ -11,6 +11,7 @@ interface InputSearchProps {
 	setPokemonName: Dispatch<string>;
 }
 
+
 export const InputSearch = (props: InputSearchProps) => {
 	const [inputValue, setinputValue] = useState("");
 

@@ -1,8 +1,9 @@
 import { IconButton } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useReducer } from "react";
 import { Delete } from "@mui/icons-material";
 import { Row } from "../DataTable/DataTableProps";
 import { PokemonsContext } from "../../context/PokemonsProvider";
+import { initRows, pokemonReducer, REMOVE_POKEMON } from "../../reducers";
 
 interface TableActionsProps {
 	row: Row;
@@ -10,14 +11,12 @@ interface TableActionsProps {
 
 export const TableActions = (props: TableActionsProps) => {
 	const { row } = props;
-	const { setPokemonIndex } = useContext(PokemonsContext);
+	const { dispatch } = useContext(PokemonsContext);
 
 	const handleClick = (evt: React.MouseEvent) => {
 		evt.stopPropagation();
-		setPokemonIndex(row.id);
+		dispatch({ type: REMOVE_POKEMON, payload: row });
 	};
 
 	return <IconButton onClick={handleClick} children={<Delete />}></IconButton>;
 };
-
-
