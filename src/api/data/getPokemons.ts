@@ -3,6 +3,11 @@ import Axios from "axios";
 import { Row } from "../../components/DataTable/DataTableProps";
 import { pokemonRowMapper } from "../../utils/utils";
 
+type PokemonNameType = {
+	name: string;
+	url: string;
+};
+
 export const getPokemon = async (query: string): Promise<Row> => {
 	const url = `https://pokeapi.co/api/v2/pokemon/${encodeURI(query)}`;
 	const { data } = await Axios.get(url);
@@ -38,4 +43,15 @@ export const getEvolutions = async (id: number): Promise<string[]> => {
 	}
 
 	return evoChain;
+};
+
+export const getPokemonsNames = async (): Promise<any> => {
+	const url = `https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0}`;
+	const { data } = await Axios.get(url);
+
+	if (!!data) {
+		return data?.results?.map((pokemon: PokemonNameType) => pokemon.name) || [];
+	}
+
+	return [];
 };

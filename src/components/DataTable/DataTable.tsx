@@ -1,24 +1,45 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { useContext, useEffect, useReducer, useState } from "react";
-import { pokemonsRowsDataMock } from "../../api/mocks/pokemons";
-import { PokemonsContext } from "../../context/PokemonsProvider";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { ErrorsShowContext } from "../../context";
+import { PokemonsContext } from "../../context/PokemonContext";
 import { useFetchPokemon } from "../../hooks/useFetchPokemon";
-import { ADD_POKEMON, initRows, pokemonReducer } from "../../reducers";
-import { removePokemonRowByIndex } from "../../utils/utils";
+import { ADD_POKEMON } from "../../reducers";
+import {
+	SHOW_POKEMON_REPEATED,
+	SHOW_WRONG_NAME,
+} from "../../reducers/ErrorsReducer";
 import { CustomToolbar } from "../CustomToolbar/CustomToolBar";
-import { DataTableProps, Row } from "./DataTableProps";
+import { DataTableProps } from "./DataTableProps";
 
 export const DataTable = (props: DataTableProps) => {
 	const { state, dispatch } = useContext(PokemonsContext);
-	const { pokemonData } = useFetchPokemon();
+	const { errorsDispatch } = useContext(ErrorsShowContext);
+	const { pokemonData, isPokemonName } = useFetchPokemon();
 	const { settings } = props;
 	const { columns, pageSize, rowsPerPageOptions, checkboxSelection } = settings;
 	const [newPageSize, setNewPageSize] = useState(pageSize);
 
+	const isANewPokemon = useMemo(
+		() => state.map((pokemon) => pokemon.id).includes(pokemonData.id),
+		[pokemonData]
+	);
+
+	console.log({ pokemonData, isPokemonName });
+
 	useEffect(() => {
-		const isANewPokemon: boolean = state
-			.map((pokemon) => pokemon.id)
-			.includes(pokemonData.id);
+		if (!isPokemonName && Object.keys(pokemonData).length > 0) {
+			errorsDispatch({
+				type: SHOW_WRONG_NAME,
+				payload: { showWrongName: isPokemonName },
+			});
+		}
+	}, [isPokemonName]);
+
+	useEffect(() => {
+		errorsDispatch({
+			type: SHOW_POKEMON_REPEATED,
+			payload: { showPokemonRepeated: isANewPokemon },
+		});
 		if (Object.keys(pokemonData).length > 0 && !isANewPokemon) {
 			dispatch({ type: ADD_POKEMON, payload: pokemonData });
 		}

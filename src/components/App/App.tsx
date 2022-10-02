@@ -1,11 +1,22 @@
-import { useContext } from "react";
 import "./App.css";
 import { DataTable } from "../DataTable";
-import { PokemonsContext } from "../../context/PokemonsProvider";
 import { dataTableSettings } from "../../settings/datatable";
 import { Header } from "../Header/Header";
+import { getPokemonsNames } from "../../api/data/getPokemons";
+import { useContext, useEffect, useState } from "react";
+import { PokemonsContext } from "../../context";
 
 export const App = () => {
+	const { savePokemonsNames } = useContext(PokemonsContext);
+
+	useEffect(() => {
+		const fetchPokemonNames = async () => {
+			const pokemonNames = await getPokemonsNames();
+			savePokemonsNames(pokemonNames);
+		};
+		fetchPokemonNames().catch(console.error);
+	}, []);
+
 	return (
 		<div className="appClass" data-testid="app_container">
 			<Header />

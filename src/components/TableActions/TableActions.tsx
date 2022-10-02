@@ -1,9 +1,9 @@
 import { IconButton } from "@mui/material";
-import React, { useContext, useReducer } from "react";
+import React, { useContext } from "react";
 import { Delete } from "@mui/icons-material";
 import { Row } from "../DataTable/DataTableProps";
-import { PokemonsContext } from "../../context/PokemonsProvider";
-import { initRows, pokemonReducer, REMOVE_POKEMON } from "../../reducers";
+import { PokemonsContext } from "../../context/PokemonContext";
+import { REMOVE_POKEMON } from "../../reducers";
 
 interface TableActionsProps {
 	row: Row;

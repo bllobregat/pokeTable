@@ -1,16 +1,10 @@
 import { Input } from "@mui/material";
-import {
-	ChangeEvent,
-	Dispatch,
-	SyntheticEvent,
-	useState,
-} from "react";
+import { ChangeEvent, Dispatch, SyntheticEvent, useState } from "react";
 import "./InputSearch.css";
 
 interface InputSearchProps {
-	setPokemonName: Dispatch<string>;
+	savePokemonName: (pokemonName: string)=> void;
 }
-
 
 export const InputSearch = (props: InputSearchProps) => {
 	const [inputValue, setinputValue] = useState("");
@@ -23,7 +17,7 @@ export const InputSearch = (props: InputSearchProps) => {
 		e.preventDefault();
 
 		if (!!inputValue && inputValue.trim().length > 2) {
-			props.setPokemonName(inputValue.toLowerCase());
+			props.savePokemonName(inputValue.toLowerCase());
 			setinputValue("");
 		}
 	};

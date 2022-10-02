@@ -9,12 +9,12 @@ describe("InputSearch", () => {
 	});
 
 	it("Should render component", () => {
-		render(<InputSearch setPokemonName={setPokemonName} />);
+		render(<InputSearch savePokemonName={setPokemonName} />);
 		expect(screen.getByTestId("form_container")).toBeInTheDocument();
 	});
 
 	it("Should call setPokemonName when we introduce a pokemon name", () => {
-		render(<InputSearch setPokemonName={setPokemonName} />);
+		render(<InputSearch savePokemonName={setPokemonName} />);
 		const input = screen.getByPlaceholderText("Search pokemon");
 		fireEvent.change(input, { target: { value: "pikachu" } });
 		fireEvent.submit(input);
