@@ -1,20 +1,34 @@
-import { DataGrid } from "@mui/x-data-grid";
-import { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { DataGrid, GridEventListener } from "@mui/x-data-grid";
+import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 import { ErrorsShowContext } from "../../context";
 import { PokemonsContext } from "../../context/PokemonContext";
 import { useFetchPokemon } from "../../hooks/useFetchPokemon";
 import { ADD_POKEMON } from "../../reducers";
-import {
-	SHOW_POKEMON_REPEATED,
-	SHOW_WRONG_NAME,
-} from "../../reducers/ErrorsReducer";
+import { SHOW_POKEMON_REPEATED } from "../../reducers/ErrorsReducer";
 import { CustomToolbar } from "../CustomToolbar/CustomToolBar";
+import { ModalSelected } from "../ModalSelected/ModalSelected";
 import { DataTableProps } from "./DataTableProps";
+
+const renderModal = (
+	pokemonIndex: number,
+	isModalOpen: boolean,
+	saveModalVisibility: (isModalOpen: boolean) => void
+): ReactElement => {
+	return (
+		<ModalSelected
+			pokemonIndex={pokemonIndex}
+			isModalOpen={isModalOpen}
+			saveModalVisibility={saveModalVisibility}
+		/>
+	);
+};
 
 export const DataTable = (props: DataTableProps) => {
 	const { state, dispatch } = useContext(PokemonsContext);
 	const { errorsDispatch } = useContext(ErrorsShowContext);
-	const { pokemonData, isPokemonName } = useFetchPokemon();
+	const { pokemonData } = useFetchPokemon();
+	const [pokemonIndex, setPokemonIndex] = useState<number>();
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const { settings } = props;
 	const { columns, pageSize, rowsPerPageOptions, checkboxSelection } = settings;
 	const [newPageSize, setNewPageSize] = useState(pageSize);
@@ -24,16 +38,9 @@ export const DataTable = (props: DataTableProps) => {
 		[pokemonData]
 	);
 
-	console.log({ pokemonData, isPokemonName });
-
-	useEffect(() => {
-		if (!isPokemonName && Object.keys(pokemonData).length > 0) {
-			errorsDispatch({
-				type: SHOW_WRONG_NAME,
-				payload: { showWrongName: isPokemonName },
-			});
-		}
-	}, [isPokemonName]);
+	const saveModalVisibility = (isModalOpen: boolean): void => {
+		setIsModalOpen(isModalOpen);
+	};
 
 	useEffect(() => {
 		errorsDispatch({
@@ -48,6 +55,11 @@ export const DataTable = (props: DataTableProps) => {
 	useEffect(() => {
 		localStorage.setItem("state", JSON.stringify(state));
 	}, [state]);
+
+	const handleRowClick: GridEventListener<"rowClick"> = (params) => {
+		setPokemonIndex(Number(params.id));
+		setIsModalOpen(true);
+	};
 
 	return (
 		<div
@@ -65,6 +77,7 @@ export const DataTable = (props: DataTableProps) => {
 				pageSize={newPageSize}
 				rowsPerPageOptions={rowsPerPageOptions}
 				checkboxSelection={checkboxSelection}
+				onRowClick={handleRowClick}
 				onPageSizeChange={(newSize) => setNewPageSize(newSize)}
 				getRowHeight={() => "auto"}
 				components={{
@@ -83,6 +96,8 @@ export const DataTable = (props: DataTableProps) => {
 					},
 				}}
 			/>
+			{!!pokemonIndex &&
+				renderModal(pokemonIndex, isModalOpen, saveModalVisibility)}
 		</div>
 	);
 };

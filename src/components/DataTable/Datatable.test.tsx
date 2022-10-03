@@ -20,14 +20,9 @@ describe("DataTable Tests", () => {
 	});
 
 	it("Should Render DataTable", () => {
-		render(<DataTable rows={pokemonsRowsDataMock} settings={dataTableSettings} />);
+		render(
+			<DataTable rows={pokemonsRowsDataMock} settings={dataTableSettings} />
+		);
 		expect(screen.getByTestId("datagrid-container")).toBeInTheDocument();
-	});
-
-	it("Should Render DataTable with 4 rows", () => {
-		render(<DataTable rows={pokemonsRowsDataMock} settings={dataTableSettings} />);
-		const datatable = screen.getByTestId("datagrid-container");
-		const elements = datatable.getElementsByClassName("MuiDataGrid-row");
-		expect(elements.length).toEqual(pokemonsRowsDataMock.length);
 	});
 });

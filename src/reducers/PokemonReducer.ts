@@ -2,6 +2,7 @@ import { Row } from "../components/DataTable/DataTableProps";
 
 export const ADD_POKEMON = "[POKEMON] addPokemon";
 export const REMOVE_POKEMON = "[POKEMON] removePokemon";
+export const GET_POKEMON = "[POKEMON] removePokemon";
 
 export type PokemonActionType = {
 	type: string;

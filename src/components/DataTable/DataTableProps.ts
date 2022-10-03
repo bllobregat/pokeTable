@@ -24,4 +24,3 @@ export interface DataTableSettings {
 	rowsPerPageOptions?: number[];
 	checkboxSelection?: boolean;
 }
- 

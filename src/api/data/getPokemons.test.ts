@@ -3,12 +3,14 @@ import { getEvolutions, getPokemon } from "./getPokemons";
 
 jest.mock("./getPokemons");
 const getPokemonMoked = jest.mocked(getPokemon, true);
-const getEvolutionsMocked = jest.mocked(getEvolutions,true);
+const getEvolutionsMocked = jest.mocked(getEvolutions, true);
 
 describe("getPokemons Tests", () => {
-	beforeEach(() => {
+	beforeEach(async () => {
 		getPokemonMoked.mockResolvedValue(pokemonDataRowMock);
-		getEvolutionsMocked.mockResolvedValue(pokemonsRowsDataMock[2].evolutionChain);
+		getEvolutionsMocked.mockResolvedValue(
+			pokemonsRowsDataMock[2].evolutionChain
+		);
 	});
 
 	it("getPokemon should return a Row object", async () => {

@@ -1,13 +1,16 @@
 import { Input } from "@mui/material";
-import { ChangeEvent, Dispatch, SyntheticEvent, useState } from "react";
+import { ChangeEvent, SyntheticEvent, useContext, useState } from "react";
+import { ErrorsShowContext } from "../../context";
+import { CLEAN_ALL_ERRORS } from "../../reducers/ErrorsReducer";
 import "./InputSearch.css";
 
 interface InputSearchProps {
-	savePokemonName: (pokemonName: string)=> void;
+	savePokemonName: (pokemonName: string) => void;
 }
 
 export const InputSearch = (props: InputSearchProps) => {
 	const [inputValue, setinputValue] = useState("");
+	const { errorsDispatch } = useContext(ErrorsShowContext);
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setinputValue(e.currentTarget.value);
@@ -19,6 +22,9 @@ export const InputSearch = (props: InputSearchProps) => {
 		if (!!inputValue && inputValue.trim().length > 2) {
 			props.savePokemonName(inputValue.toLowerCase());
 			setinputValue("");
+			setTimeout(() => {
+				errorsDispatch({ type: CLEAN_ALL_ERRORS, payload: {} });
+			}, 2000);
 		}
 	};
 

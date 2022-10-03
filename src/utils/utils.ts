@@ -1,12 +1,10 @@
 import { capitalize } from "@mui/material/utils";
 import { Row } from "../components/DataTable/DataTableProps";
 
-
 type imageType = {
 	slot: number;
 	type: { name: string; url: string };
 };
-
 
 export const pokemonRowMapper = (data: any, evolutionChain: string[]): Row => {
 	const types: string[] =

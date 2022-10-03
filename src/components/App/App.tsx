@@ -3,7 +3,7 @@ import { DataTable } from "../DataTable";
 import { dataTableSettings } from "../../settings/datatable";
 import { Header } from "../Header/Header";
 import { getPokemonsNames } from "../../api/data/getPokemons";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { PokemonsContext } from "../../context";
 
 export const App = () => {

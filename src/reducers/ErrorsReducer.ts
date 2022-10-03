@@ -1,5 +1,6 @@
 export const SHOW_POKEMON_REPEATED = "[ERRORS] showPokemonRepeated";
 export const SHOW_WRONG_NAME = "[ERRORS] showWrongName";
+export const CLEAN_ALL_ERRORS = "[ERRORS] cleanAllErrors";
 
 export interface Errors {
 	showPokemonRepeated?: boolean;
@@ -32,6 +33,11 @@ export const errorsReducer = (
 			return {
 				...state,
 				showWrongName: action.payload.showWrongName,
+			};
+		case CLEAN_ALL_ERRORS:
+			return {
+				showWrongName: false,
+				showPokemonRepeated: false,
 			};
 		default:
 			return state;
