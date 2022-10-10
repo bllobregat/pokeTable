@@ -1,4 +1,5 @@
 import { capitalize } from "@mui/material/utils";
+import { AditionalData } from "../api/data/getPokemons";
 import { Row } from "../components/DataTable/DataTableProps";
 
 type imageType = {
@@ -6,7 +7,16 @@ type imageType = {
 	type: { name: string; url: string };
 };
 
-export const pokemonRowMapper = (data: any, evolutionChain: string[]): Row => {
+export interface Stats {
+	base_stat: number;
+	effort: number;
+	stat: {
+		name: string;
+		url?: string;
+	};
+}
+
+export const pokemonRowMapper = (data: any, aditionalData: AditionalData): Row => {
 	const types: string[] =
 		data?.types?.map((type: imageType) => {
 			return capitalize(type.type.name);
@@ -17,8 +27,11 @@ export const pokemonRowMapper = (data: any, evolutionChain: string[]): Row => {
 		image: data.sprites.front_default,
 		name: capitalize(data.name),
 		types,
-		evolutionChain: evolutionChain,
+		evolutionChain: aditionalData.evolChain,
 		dataAdded: new Date(),
+		imageFront: data.sprites.other.home.front_default,
+		stats: data.stats,
+		description: aditionalData.description,
 	};
 };
 

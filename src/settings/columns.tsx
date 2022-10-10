@@ -36,7 +36,7 @@ export const columns: GridColDef[] = [
 	{
 		field: "types",
 		headerName: "Types",
-		width: 130,
+		width: 100,
 		flex: 1,
 		headerAlign: "center",
 		align: "center",
@@ -59,7 +59,7 @@ export const columns: GridColDef[] = [
 		minWidth: 150,
 		flex: 1,
 		headerAlign: "center",
-		align: "center",
+
 		sortable: false,
 		renderCell: (params: GridRenderCellParams) => (
 			<ol

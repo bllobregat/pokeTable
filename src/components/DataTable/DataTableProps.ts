@@ -1,4 +1,5 @@
 import { GridColDef } from "@mui/x-data-grid";
+import { Stats } from "../../utils/utils";
 
 export interface Row {
 	id: number;
@@ -7,6 +8,9 @@ export interface Row {
 	types: string[];
 	evolutionChain: string[];
 	dataAdded?: Date | string;
+	imageFront?: string;
+	stats?: Stats[];
+	description: string;
 }
 
 export interface DataTableProps {

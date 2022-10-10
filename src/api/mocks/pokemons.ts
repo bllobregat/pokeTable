@@ -9,6 +9,8 @@ export const pokemonsRowsDataMock: Row[] = [
 		types: ["static"],
 		evolutionChain: ["pichu", "pikachu", "raichu"],
 		dataAdded: "2022-09-25T20:19:36.529Z",
+		description:
+			"When several of\nthese POKéMON\ngather, their\felectricity could\nbuild and cause\nlightning storms.",
 	},
 	{
 		id: 1,
@@ -18,6 +20,8 @@ export const pokemonsRowsDataMock: Row[] = [
 		types: ["grass", "poison"],
 		evolutionChain: ["bulbasaur", "ivysaur", "venasaur"],
 		dataAdded: "2022-09-25T20:19:36.529Z",
+		description:
+			"A strange seed was\nplanted on its\nback at birth.\fThe plant sprouts\nand grows with\nthis POKéMON.",
 	},
 	{
 		id: 4,
@@ -27,6 +31,8 @@ export const pokemonsRowsDataMock: Row[] = [
 		types: ["fire"],
 		evolutionChain: ["charmander", "charmeleon", "charizard"],
 		dataAdded: "2022-09-25T20:19:36.529Z",
+		description:
+			"Obviously prefers\nhot places. When\nit rains, steam\fis said to spout\nfrom the tip of\nits tail.",
 	},
 	{
 		id: 7,
@@ -36,10 +42,12 @@ export const pokemonsRowsDataMock: Row[] = [
 		types: ["water"],
 		evolutionChain: ["squirtle", "wartortle", "blastoise"],
 		dataAdded: "2022-09-25T20:19:36.529Z",
+		description:
+			"After birth, its\nback swells and\nhardens into a\fshell. Powerfully\nsprays foam from\nits mouth.",
 	},
 ];
 
-export const pokemonDataRowMock: Row= {
+export const pokemonDataRowMock: Row = {
 	id: 4,
 	image:
 		"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
@@ -47,6 +55,8 @@ export const pokemonDataRowMock: Row= {
 	types: ["Fire"],
 	evolutionChain: ["charmander", "charmaleon", "charizard"],
 	dataAdded: "2022-09-25T22:25:21.218Z",
+	description:
+		"Obviously prefers\nhot places. When\nit rains, steam\fis said to spout\nfrom the tip of\nits tail.",
 };
 
 export const pokemonDataMock = {

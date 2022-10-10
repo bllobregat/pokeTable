@@ -5,17 +5,18 @@ import { Header } from "../Header/Header";
 import { getPokemonsNames } from "../../api/data/getPokemons";
 import { useContext, useEffect } from "react";
 import { PokemonsContext } from "../../context";
+import { useBreakpoint } from "../../hooks/useBreakpoint";
+import { PortraitPlaceholder } from "../PortraitPlaceHolder/PortraitPlaceHolder";
 
 export const App = () => {
-	const { savePokemonsNames } = useContext(PokemonsContext);
+	const breakpoint = useBreakpoint();
 
-	useEffect(() => {
-		const fetchPokemonNames = async () => {
-			const pokemonNames = await getPokemonsNames();
-			savePokemonsNames(pokemonNames);
-		};
-		fetchPokemonNames().catch(console.error);
-	}, []);
+	if (
+		breakpoint === "S" &&
+		window.matchMedia("(orientation: portrait)").matches
+	) {
+		return <PortraitPlaceholder />;
+	}
 
 	return (
 		<div className="appClass" data-testid="app_container">

@@ -1,0 +1,11 @@
+.stats {
+	display: flex;
+	flex-direction: row;
+	padding-top: 0.5rem;
+}
+
+.stats li {
+	list-style-type: none;
+    font-weight: 500;
+	padding-right: 0.5rem;
+}

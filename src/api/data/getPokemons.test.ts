@@ -1,16 +1,17 @@
 import { pokemonDataRowMock, pokemonsRowsDataMock } from "../mocks/pokemons";
-import { getEvolutions, getPokemon } from "./getPokemons";
+import { getAditionalData, getPokemon } from "./getPokemons";
 
 jest.mock("./getPokemons");
 const getPokemonMoked = jest.mocked(getPokemon, true);
-const getEvolutionsMocked = jest.mocked(getEvolutions, true);
+const getAditionalDataMocked = jest.mocked(getAditionalData, true);
 
 describe("getPokemons Tests", () => {
 	beforeEach(async () => {
 		getPokemonMoked.mockResolvedValue(pokemonDataRowMock);
-		getEvolutionsMocked.mockResolvedValue(
-			pokemonsRowsDataMock[2].evolutionChain
-		);
+		getAditionalDataMocked.mockResolvedValue({
+			evolChain: pokemonDataRowMock.evolutionChain,
+			description: pokemonDataRowMock.description,
+		});
 	});
 
 	it("getPokemon should return a Row object", async () => {
@@ -20,7 +21,10 @@ describe("getPokemons Tests", () => {
 	});
 
 	it("getPokemon should return an array with chain evolution", async () => {
-		const response = await getEvolutions(4);
-		expect(response).toEqual(pokemonsRowsDataMock[2].evolutionChain);
+		const response = await getAditionalData(4);
+		expect(response).toEqual({
+			evolChain: pokemonDataRowMock.evolutionChain,
+			description: pokemonDataRowMock.description,
+		});
 	});
 });
