@@ -3,7 +3,7 @@ import {
 	pokemonDataRowMock,
 	pokemonsRowsDataMock,
 } from "../api/mocks/pokemons";
-import { pokemonRowMapper, removePokemonRowByIndex } from "./utils";
+import { formatText, pokemonRowMapper, removePokemonRowByIndex } from "./utils";
 import { Row } from "../components/DataTable/DataTableProps";
 
 describe("utils", () => {
@@ -19,5 +19,11 @@ describe("utils", () => {
 	it("removePokemonRowByIndex should return a Rows array", () => {
 		const rowsPokemonFilter = removePokemonRowByIndex(pokemonsRowsDataMock, 7);
 		expect(rowsPokemonFilter).toEqual(pokemonsRowsDataMock.slice(0, 3));
+	});
+
+	it("formatText should format text without any special character", () => {
+		const result =
+			"Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail.";
+		expect(formatText(pokemonDataRowMock.description)).toEqual(result);
 	});
 });

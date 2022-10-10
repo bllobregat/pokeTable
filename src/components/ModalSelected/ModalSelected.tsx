@@ -1,14 +1,8 @@
-import {
-	capitalize,
-	Card,
-	CardContent,
-	CardMedia,
-	Modal,
-	Typography,
-} from "@mui/material";
-import { useContext, useEffect, useMemo } from "react";
+import { Card, CardContent, CardMedia, Modal, Typography } from "@mui/material";
+import { useContext, useMemo } from "react";
 import { PokemonsContext } from "../../context";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
+import { formatText } from "../../utils/utils";
 import "./ModalSelected.css";
 
 interface ModalProps {
@@ -26,10 +20,6 @@ export const stats = [
 	"Speed",
 ];
 
-const formatText = (text: string | undefined): string => {
-	return text ? text.replace(/(\r\n|\n|\r|\f)/gm, " ") : "";
-};
-
 export const ModalSelected = (props: ModalProps) => {
 	const { isModalOpen, pokemonIndex, saveModalVisibility } = props;
 	const { state } = useContext(PokemonsContext);
@@ -45,7 +35,7 @@ export const ModalSelected = (props: ModalProps) => {
 		<>
 			<Modal
 				open={isModalOpen}
-				data-testid={"modal-container"}
+				data-testid="modal-container"
 				onClose={handleClose}
 			>
 				<Card
@@ -77,7 +67,7 @@ export const ModalSelected = (props: ModalProps) => {
 						<Typography variant="body2" color="text.secondary">
 							{formatText(pokemonSelected?.description)}
 						</Typography>
-						<div className="stats">
+						<div className="stats" data-testid="stats_container">
 							{!!pokemonSelected &&
 								pokemonSelected?.stats?.map((stat, i) => (
 									<li key={stats[i]}>{stats[i] + " " + stat.base_stat}</li>

@@ -55,6 +55,57 @@ export const pokemonDataRowMock: Row = {
 	types: ["Fire"],
 	evolutionChain: ["charmander", "charmaleon", "charizard"],
 	dataAdded: "2022-09-25T22:25:21.218Z",
+	imageFront: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/4.png",
+	stats: [
+		{
+			base_stat: 39,
+			effort: 0,
+			stat: {
+				name: "hp",
+				url: "https://pokeapi.co/api/v2/stat/1/",
+			},
+		},
+		{
+			base_stat: 52,
+			effort: 0,
+			stat: {
+				name: "attack",
+				url: "https://pokeapi.co/api/v2/stat/2/",
+			},
+		},
+		{
+			base_stat: 43,
+			effort: 0,
+			stat: {
+				name: "defense",
+				url: "https://pokeapi.co/api/v2/stat/3/",
+			},
+		},
+		{
+			base_stat: 60,
+			effort: 0,
+			stat: {
+				name: "special-attack",
+				url: "https://pokeapi.co/api/v2/stat/4/",
+			},
+		},
+		{
+			base_stat: 50,
+			effort: 0,
+			stat: {
+				name: "special-defense",
+				url: "https://pokeapi.co/api/v2/stat/5/",
+			},
+		},
+		{
+			base_stat: 65,
+			effort: 1,
+			stat: {
+				name: "speed",
+				url: "https://pokeapi.co/api/v2/stat/6/",
+			},
+		},
+	],
 	description:
 		"Obviously prefers\nhot places. When\nit rains, steam\fis said to spout\nfrom the tip of\nits tail.",
 };

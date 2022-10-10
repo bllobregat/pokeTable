@@ -38,3 +38,8 @@ export const pokemonRowMapper = (data: any, aditionalData: AditionalData): Row =
 export const removePokemonRowByIndex = (rows: Row[], index: number): Row[] => {
 	return rows.filter((row) => row.id !== index);
 };
+
+
+export const formatText = (text: string | undefined): string => {
+	return text ? text.replace(/(\r\n|\n|\r|\f)/gm, " ") : "";
+};
